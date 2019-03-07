@@ -26,7 +26,7 @@ def news(request):
     return render(request,"cms/news.html",{"News":data})
 
 @api_view(['GET', 'POST', 'DELETE'])
-def AirCrafts_detail(request,pk):
+def AirCrafts_primary(request,pk):
     Aircraft_data = AirCrafts.objects.get(pk=pk)
     if request.method == 'GET':
         serializer = AirCraftsSerializer(Aircraft_data)
@@ -70,7 +70,7 @@ def Flights_detail(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 @api_view(['GET', 'POST', 'DELETE'])
-def Flights_detail(request,pk):
+def Flights_primary(request,pk):
     flight_data=Flights.objects.get(pk=pk)
     if request.method == 'GET':
         serializer = FlightsSerializer(flight_data)
@@ -84,7 +84,7 @@ def Flights_detail(request,pk):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 @api_view(['GET', 'POST', 'DELETE'])
 def News_detail(request):
-    News_data=NewsFeed.obects.all()
+    News_data=NewsFeed.objects.all()
     if request.method == 'GET':
         serializer = NewsFeedSerializer(News_data,many=True)
         return Response(serializer.data)
@@ -96,8 +96,8 @@ def News_detail(request):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 @api_view(['GET', 'POST', 'DELETE'])
-def News_detail(request,pk):
-    News_data=NewsFeed.obects.get(pk)
+def News_primary(request,pk):
+    News_data=NewsFeed.objects.get(pk)
     if request.method == 'GET':
         serializer = NewsFeedSerializer(News_data)
         return Response(serializer.data)

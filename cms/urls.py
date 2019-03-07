@@ -18,9 +18,9 @@ from .views import *
 
 urlpatterns = [
     path('',index,name="index"),
-    path('api/aircraft/<int:pk>',AirCrafts_detail,name="AirCrafts_detail"),
-    path('api/flight/<int:pk>',Flights_detail,name="flight"),
-    path('api/news/<int:pk>',News_detail,name="news"),
+    path('api/aircraft/<int:pk>',AirCrafts_primary,name="AirCrafts_detail"),
+    path('api/flight/<int:pk>',Flights_primary,name="flight"),
+    path('api/news/<int:pk>',News_primary,name="news"),
     path('api/aircraft/',AirCrafts_detail,name="Air"),
     path('api/flight/',Flights_detail,name="flight"),
     path('api/news/',News_detail,name="news"),
