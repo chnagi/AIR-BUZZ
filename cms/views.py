@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 def index(request):
     return render(request,"cms/index.html")
@@ -27,6 +28,7 @@ def news(request):
     data = News.data
     return render(request,"cms/news.html",{"News":data})
 
+@csrf_exempt
 @api_view(['GET', 'POST', 'DELETE'])
 def AirCrafts_primary(request,pk):
     Aircraft_data = AirCrafts.objects.get(pk=pk)
@@ -34,7 +36,9 @@ def AirCrafts_primary(request,pk):
         serializer = AirCraftsSerializer(Aircraft_data)
         return Response(serializer.data)
 
- 
+
+
+@csrf_exempt
 @api_view(['GET', 'POST', 'DELETE'])
 def AirCrafts_detail(request):
     Aircraft_data = AirCrafts.objects.all()
@@ -50,6 +54,8 @@ def AirCrafts_detail(request):
     		return Response(serializer.data)
     	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
+
+@csrf_exempt
 @api_view(['GET', 'POST', 'DELETE'])
 def Flights_detail(request):
     flight_data=Flights.objects.all()
@@ -63,6 +69,9 @@ def Flights_detail(request):
             serializer.save()
             return Response(serializer.data)
         
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@csrf_exempt
 @api_view(['GET', 'POST', 'DELETE'])
 def Flights_primary(request,pk):
     flight_data=Flights.objects.get(pk=pk)
@@ -71,6 +80,7 @@ def Flights_primary(request,pk):
         return Response(serializer.data)
 
 
+@csrf_exempt
 @api_view(['GET', 'POST', 'DELETE'])
 def News_detail(request):
     News_data=NewsFeed.objects.all()
@@ -84,6 +94,8 @@ def News_detail(request):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@csrf_exempt
 @api_view(['GET', 'POST', 'DELETE'])
 def News_primary(request,pk):
     News_data=NewsFeed.objects.get(pk)
