@@ -12,6 +12,10 @@ def aircraft(request):
     planes = AirCraftsSerializer(AirCrafts.objects.all(),many=True)
     data = planes.data
     return render(request,"cms/aircraft.html",{"airdata":data})
+def flights(request):
+    flight = AirCraftsSerializer(AirCrafts.objects.all(),many=True)
+    data = flight.data
+    return render(request,"cms/flight.html",{"flightdata":data})
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def AirCrafts_detail(request):
