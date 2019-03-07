@@ -14,3 +14,9 @@ $ pip install -r requirements.txt
 ```bash
 ./manage.py createsuperuser
 ```
+4. use `index.html` in frontend to run the frontend code (made in angular)
+
+## Contributors
+- Apoorv Bankey
+- Nagalakshmi
+- Vaishnav Murali
