@@ -4,6 +4,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 class AirCrafts(models.Model):
 	MSN = models.IntegerField(primary_key=True,validators=[MinValueValidator(0)])
 	Name = models.CharField(max_length=100)
+
 class Flights(models.Model):
 	MSN=models.ForeignKey(AirCrafts,on_delete=models.CASCADE)
 	HarnessLength = models.IntegerField(default=0,validators=[ MinValueValidator(0)])
