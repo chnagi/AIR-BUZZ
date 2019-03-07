@@ -19,4 +19,6 @@ from .views import *
 urlpatterns = [
     path('',index,name="index"),
     path('aircraft/',aircraft,name="air"),
+    path('flight/',flights,name="flight"),
+    path('news/',news,name="news"),
 ]
