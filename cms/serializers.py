@@ -6,6 +6,7 @@ class AirCraftsSerializer(serializers.ModelSerializer):
 		model=AirCrafts
 		fields='__all__'
 class FlightsSerializer(serializers.ModelSerializer):
+	MSN = AirCraftsSerializer(many=False)
 	class Meta:
 		model=Flights
 		fields='__all__'
