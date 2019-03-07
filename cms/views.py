@@ -40,3 +40,16 @@ def Flights_detail(request):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def News_detail(request):
+    News_data=NewsFeed.obects.all()
+    if request.method == 'GET':
+        serializer = NewsFeedSerializer(News_data,many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = NewsFeedSerializer(News_data, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

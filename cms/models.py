@@ -16,3 +16,11 @@ class Flights(models.Model):
 	FuelQuantity_right=models.IntegerField(default=0,validators=[MinValueValidator(0)])
 	Max_Altitude=models.IntegerField(default=0,validators=[MinValueValidator(0)])
 	Flight_No=models.CharField(max_length=100)
+class NewsFeed(models.Model):
+	Title=models.CharField(max_length=100)
+	Author=models.CharField(max_length=100)
+	Date=models.DateTimeField(auto_now_add=True, blank=False)
+	Body=models.TextField(blank=False, null=False)
+
+	
+	
