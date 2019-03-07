@@ -4,6 +4,8 @@ from . serializers import *
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 def index(request):
@@ -34,15 +36,7 @@ def AirCrafts_primary(request,pk):
         serializer = AirCraftsSerializer(Aircraft_data)
         return Response(serializer.data)
 
-    elif request.method == 'POST':
-        serializer = AirCraftsSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    """elif request.method == 'DELETE':
-        Aircraft_data.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)"""
+
 
 @csrf_exempt
 @api_view(['GET', 'POST', 'DELETE'])
@@ -53,11 +47,13 @@ def AirCrafts_detail(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = AirCraftsSerializer(Aircraft_data, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    	#data=JSONParser().parse(request)
+    	serializer = AirCraftsSerializer(data=request.data)
+    	if serializer.is_valid():
+    		serializer.save()
+    		return Response(serializer.data)
+    	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
 
 @csrf_exempt
 @api_view(['GET', 'POST', 'DELETE'])
@@ -67,11 +63,12 @@ def Flights_detail(request):
         serializer = FlightsSerializer(flight_data,many=True)
         return Response(serializer.data)
 
-    elif request.method == 'PUT':
-        serializer = FlightsSerializer(flight_data, data=request.data)
+    elif request.method == 'POST':
+        serializer = FlightsSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
+        
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @csrf_exempt
@@ -82,12 +79,6 @@ def Flights_primary(request,pk):
         serializer = FlightsSerializer(flight_data)
         return Response(serializer.data)
 
-    elif request.method == 'POST':
-        serializer = FlightsSerializer(flight_data, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @csrf_exempt
 @api_view(['GET', 'POST', 'DELETE'])
@@ -98,7 +89,7 @@ def News_detail(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = NewsFeedSerializer(News_data, data=request.data)
+        serializer = NewsFeedSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -112,9 +103,4 @@ def News_primary(request,pk):
         serializer = NewsFeedSerializer(News_data)
         return Response(serializer.data)
 
-    elif request.method == 'POST':
-        serializer = NewsFeedSerializer(News_data, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
