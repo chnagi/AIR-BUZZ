@@ -4,6 +4,8 @@ from . serializers import *
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
 # Create your views here.
 def index(request):
     return render(request,"cms/index.html")
@@ -32,15 +34,7 @@ def AirCrafts_primary(request,pk):
         serializer = AirCraftsSerializer(Aircraft_data)
         return Response(serializer.data)
 
-    elif request.method == 'POST':
-        serializer = AirCraftsSerializer(Aircraft_data, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    """elif request.method == 'DELETE':
-        Aircraft_data.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)"""
+ 
 @api_view(['GET', 'POST', 'DELETE'])
 def AirCrafts_detail(request):
     Aircraft_data = AirCrafts.objects.all()
@@ -49,11 +43,12 @@ def AirCrafts_detail(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = AirCraftsSerializer(Aircraft_data, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    	#data=JSONParser().parse(request)
+    	serializer = AirCraftsSerializer(data=request.data)
+    	if serializer.is_valid():
+    		serializer.save()
+    		return Response(serializer.data)
+    	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 @api_view(['GET', 'POST', 'DELETE'])
 def Flights_detail(request):
@@ -62,12 +57,11 @@ def Flights_detail(request):
         serializer = FlightsSerializer(flight_data,many=True)
         return Response(serializer.data)
 
-    elif request.method == 'PUT':
-        serializer = FlightsSerializer(flight_data, data=request.data)
+    elif request.method == 'POST':
+        serializer = FlightsSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 @api_view(['GET', 'POST', 'DELETE'])
 def Flights_primary(request,pk):
@@ -76,12 +70,7 @@ def Flights_primary(request,pk):
         serializer = FlightsSerializer(flight_data)
         return Response(serializer.data)
 
-    elif request.method == 'POST':
-        serializer = FlightsSerializer(flight_data, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 @api_view(['GET', 'POST', 'DELETE'])
 def News_detail(request):
     News_data=NewsFeed.objects.all()
@@ -90,7 +79,7 @@ def News_detail(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = NewsFeedSerializer(News_data, data=request.data)
+        serializer = NewsFeedSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -102,9 +91,4 @@ def News_primary(request,pk):
         serializer = NewsFeedSerializer(News_data)
         return Response(serializer.data)
 
-    elif request.method == 'POST':
-        serializer = NewsFeedSerializer(News_data, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
