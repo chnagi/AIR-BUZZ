@@ -11,11 +11,15 @@ def index(request):
 def aircraft(request):
     planes = AirCraftsSerializer(AirCrafts.objects.all(),many=True)
     data = planes.data
-    return render(request,"cms/aircraft.html",{"airdata":data})
+    flight = FlightsSerializer(Flights.objects.all(),many=True)
+    data2 = flight.data
+    return render(request,"cms/aircraft.html",{"airdata":data,"flights":data2})
+
 def flights(request):
     flight = FlightsSerializer(Flights.objects.all(),many=True)
     data = flight.data
     return render(request,"cms/flight.html",{"flightdata":data})
+
 def news(request):
     News = NewsFeedSerializer(NewsFeed.objects.all(),many=True)
     data = News.data

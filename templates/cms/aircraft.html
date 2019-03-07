@@ -3,25 +3,33 @@
 		<head>
 			<title>Airbus</title>
 		</head>
-  		<link rel="stylesheet" href="index.css">
+		{% load static %}
+  		<link rel="stylesheet" href="{% static 'aircraft.css'%}">
 		<body>
 			<nav class="sidenav">
   <ul class="side-nav-list">
     <li><input placeholder="Look for your craft..." class="search-craft"/></li>
-    <li class="side-nav-list-item">
-      A320
+		{% for aircraft in airdata %}
+		<li class="side-nav-list-item">
+      {{aircraft.Name}}
     </li>
-    <li class="side-nav-list-item">
+		{% endfor %}
+    <!-- <li class="side-nav-list-item">
       A330
     </li>
     <li class="side-nav-list-item">
       A350
-    </li>
+    </li> -->
   </ul>
 </nav>
 <main>
   <div clas="content">
+		{% for flight in flights %}
     <div class="aircraft-content">
+			<center><p>{{flight.MSN}} - {{flight.Flight_No}}</p></center>
+    </div>
+		{% endfor %}
+    <!-- <div class="aircraft-content">
 
     </div>
     <div class="aircraft-content">
@@ -29,9 +37,6 @@
     </div>
     <div class="aircraft-content">
 
-    </div>
-    <div class="aircraft-content">
-    
     </div>
     <div class="aircraft-content">
 
@@ -46,66 +51,66 @@
 
       </div>
       <div class="aircraft-content">
-  
+
       </div>
       <div class="aircraft-content">
-  
+
       </div>
       <div class="aircraft-content">
-      
+
       </div>
       <div class="aircraft-content">
-  
+
       </div>
       <div class="aircraft-content">
-  
+
       </div>
       <div class="aircraft-content">
-  
+
       </div>
       <div class="aircraft-content">
 
         </div>
         <div class="aircraft-content">
-    
+
         </div>
         <div class="aircraft-content">
-    
+
         </div>
         <div class="aircraft-content">
-        
+
         </div>
         <div class="aircraft-content">
-    
+
         </div>
         <div class="aircraft-content">
-    
+
         </div>
         <div class="aircraft-content">
-    
+
         </div>
         <div class="aircraft-content">
 
           </div>
           <div class="aircraft-content">
-      
+
           </div>
           <div class="aircraft-content">
-      
+
           </div>
           <div class="aircraft-content">
-          
+
           </div>
           <div class="aircraft-content">
-      
+
           </div>
           <div class="aircraft-content">
-      
+
           </div>
           <div class="aircraft-content">
-      
-          </div>
-                
+
+          </div> -->
+
   </div>
 </main>
 		</body>

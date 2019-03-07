@@ -1,1 +1,70 @@
-<script>console.log("Homepage")</script>
+<!DOCTYPE html>
+	<html>
+		<head>
+  		<title>Airbus</title>
+		</head>
+  		<!-- <link rel="stylesheet" href="index.css"> -->
+      {% load static %}
+       <link rel="stylesheet" href="{% static 'style.css'%}">
+		<body>
+			<nav class="nav">
+			  <ul class="nav-list">
+				  <!-- <li class="nav-list-item">
+					<img src="../../assets/logo.png" class="nav-brand"/>
+				  </li> -->
+				  <li class="nav-list-item">
+						AIRBUS
+				  </li>
+			  </ul>
+			</nav>
+			<div class="body">
+				<section class="section">
+					<div class="section-brand">
+						<i class="fas fa-anchor fa-7x" style="color:#fff;padding:20px"></i>
+					</div>
+          <a href="{% url 'air' %}">
+					<div class="section-content">
+						<h3 class="headline">Aircraft details</h3>
+						<p>
+
+						</p>
+					</div>
+        </a>
+				</section>
+				<section class="section">
+					<div class="section-content">
+						<h3 class="headline">"Take-off" Your Data</h3>
+						<p>
+						</p>
+					</div>
+					<div class="section-brand">
+						<i class="fas fa-plane fa-7x" style="color:#fff;padding:20px;"></i>
+					</div>
+				</section>
+				<section class="section">
+					<div class="section-brand">
+						<i class="fas fa-subway fa-7x" style="color:#fff;padding: 20px;"></i>
+					</div>
+					<div class="section-content">
+						<h3 class="headline">Take a Subway</h3>
+						<p>
+						</p>
+					</div>
+				</section>
+				<section class="section">
+					<div class="section-content">
+						<h3 class="headline">Secure Transport</h3>
+						<p>
+						</p>
+					</div>
+					<div class="section-brand">
+						<i class="fas fa-taxi fa-7x" style="color:#fff;padding:20px;"></i>
+					</div>
+				</section>
+			</div>
+
+			<footer class="foot">
+				<p align="center">Visit Us Again - <span style="font-style: italic">'Au revoir'</span></p>
+			</footer>
+		</body>
+	</html>
