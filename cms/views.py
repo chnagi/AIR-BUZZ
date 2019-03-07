@@ -4,15 +4,18 @@ from . serializers import *
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-import requests
 # Create your views here.
 def index(request):
     return render(request,"cms/index.html")
-    
+
+def aircraft(request):
+    planes = AirCraftsSerializer(AirCrafts.objects.all(),many=True)
+    data = planes.data
+    return render(request,"cms/aircraft.html",{"airdata":data})
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def AirCrafts_detail(request):
-    Aircraft_data=AirCrafts.obects.all()
+    Aircraft_data=AirCrafts.objects.all()
     if request.method == 'GET':
         serializer = AirCraftsSerializer(Aircraft_data,many=True)
         return Response(serializer.data)
@@ -23,6 +26,8 @@ def AirCrafts_detail(request):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
 def Flights_detail(request):
     flight_data=Flights.objects.all()
     if request.method == 'GET':
@@ -35,6 +40,7 @@ def Flights_detail(request):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 def News_detail(request):
     News_data=NewsFeed.obects.all()
     if request.method == 'GET':
@@ -47,5 +53,3 @@ def News_detail(request):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
