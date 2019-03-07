@@ -64,7 +64,7 @@ def Flights_detail(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = FlightsSerializer(data=request.data)
+        serializer = FlightsSerializerPOST(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
