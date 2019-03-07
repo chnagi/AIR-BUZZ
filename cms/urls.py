@@ -18,7 +18,12 @@ from .views import *
 
 urlpatterns = [
     path('',index,name="index"),
-    path('aircraft/',aircraft,name="air"),
-    path('flight/',flights,name="flight"),
-    path('news/',news,name="news"),
+    path('aircraft/<int:pk>',AirCrafts_detail,name="AirCrafts_detail"),
+    path('flight/<int:pk>',Flights_detail,name="flight"),
+    path('news/<int:pk>',News_detail,name="news"),
+    path('aircraft/',AirCrafts_detail,name="air"),
+    path('flight/',Flights_detail,name="flight"),
+    path('news/',News_detail,name="news"),
+
+    
 ]
